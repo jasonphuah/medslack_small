@@ -1,0 +1,70 @@
+[
+  {
+    "name" : "Minh",
+    "NRIC" : "G1021407Q",
+    "updated_at" : "",
+    "statistics" : {
+      "hr" : [{
+        "created_at" : "2016-11-18T14:54:51Z",
+        "ended_at" : "2016-11-18T14:54:51Z",
+        "stats" : [
+              {
+                "data" : "",
+                "updated_at" : ""
+              } , {
+                "data" : "",
+                "updated_at" : ""
+              }
+        ]},{
+        "created_at" : "2016-11-18T20:27:03Z",
+        "ended_at" : "2016-11-18T20:27:03Z",
+        "stats" : [
+                    {
+                      "data" : "",
+                      "updated_at" : ""
+                    } , {
+                      "data" : "",
+                      "updated_at" : ""
+                    }
+        ]}
+        ],
+      "spo2" : [],
+      "temp" : []
+    }
+  },
+  {
+    "name" : "Jason",
+    "NRIC" : "G1091307Z",
+    "updated_at" : "",
+    "statistics" : [
+      {
+        "hr" : [{
+          "created_at" : "2016-11-18T14:54:51Z",
+          "ended_at" : "2016-11-18T14:54:51Z",
+          "stats" : [
+                {
+                  "data" : "",
+                  "updated_at" : ""
+                } , {
+                  "data" : "",
+                  "updated_at" : ""
+                }
+          ]},{
+          "created_at" : "2016-11-18T20:27:03Z",
+          "ended_at" : "2016-11-18T20:27:03Z",
+          "stats" : [
+                      {
+                        "data" : "",
+                        "updated_at" : ""
+                      } , {
+                        "data" : "",
+                        "updated_at" : ""
+                      }
+          ]}
+          ],
+        "spo2" : [],
+        "temp" : []
+      }
+    ]
+  }
+]
