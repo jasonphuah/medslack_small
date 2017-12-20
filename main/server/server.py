@@ -32,7 +32,7 @@ def all_patients():
     if patients:
         return jsonify(results)
     else:
-        return 'No patients found'
+        return 'Fucking No patients found'
 
 @app.route('/api/patients/new', methods=['GET','POST'])
 def new_patient():
