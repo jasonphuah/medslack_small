@@ -23,6 +23,23 @@ db = client['medslack']
 def index():
     return render_template('index.html')
 
+@app.route('/api/patients', methods=['GET'])
+def all_patients():
+    patients = db.patients.find()
+    results = {}
+    for i, j in enumerate(patients):
+        results[i+1] = {'id': str(j['_id']), 'patient_name' : j['name'], 'NRIC': j['NRIC']}
+    if patients:
+        return jsonify(results)
+    else:
+        return 'No patients found'
+
+@app.route('/api/patients/<patient_id>', methods=['GET'])
+def find_patient(patient_id):
+    patient = db.patients.find_one({"_id" : ObjectId(patient_id)})
+    result = {'patient_name': patient['name'], 'statistics' : patient['statistics'] }
+    return jsonify(result)
+
 @app.route('/api/patients/new', methods=['GET','POST'])
 def new_patient():
     if request.method == 'POST':
@@ -42,22 +59,6 @@ def new_patient():
         return "success"
     return json.dumps({'status':'OK'});
 
-@app.route('/api/patients', methods=['GET'])
-def all_patients():
-    patients = db.patients.find()
-    results = {}
-    for i, j in enumerate(patients):
-        results[i] = {'id': str(j['_id']), 'patient_name' : j['name'], 'NRIC': j['NRIC']}
-    if patients:
-        return jsonify(results)
-    else:
-        return 'No patients found'
-
-@app.route('/api/patients/<patient_id>', methods=['GET'])
-def find_patient(patient_id):
-    patient = db.patients.find_one({"_id" : ObjectId(patient_id)})
-    result = {'patient_name': patient['name'], 'statistics' : patient['statistics'] }
-    return jsonify(result)
 
 if __name__ == '__main__':
     app.run()
