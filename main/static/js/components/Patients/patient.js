@@ -4,6 +4,7 @@ import axios from 'axios';
 // Import Live Charts
 import HeartRateGraph from '../Graphs/heart_rate';
 import BloodSaturationGraph from '../Graphs/blood_str';
+import EcgGraph from '../Graphs/ecg';
 
 /****************************  PatientComp  ******************************/
 
@@ -31,12 +32,21 @@ class Patient extends Component {
         var sPStats = [];
         var hRStats = [];
         var tempStats = [];
+        var ecgStats = [];
         var dates = [];
         this.setState({
           currentPatientSpO2: stats[stats.length - 1].spo2,
-          currentPatientHeartRate: stats[stats.length - 1].ecg,
-          currentPatientTemperature: stats[stats.length - 1].temperature
+          currentPatientHeartRate: stats[stats.length - 1].hr,
+          currentPatientTemperature: stats[stats.length - 1].temperature,
+          currentPatientEcg: stats[stats.length - 1].ecg
         });
+
+        for (var i = 0; i < stats.length; i++) {
+          ecgStats.push({
+            ecg: parseFloat(stats[i].ecg),
+            updated_at: stats[i].updated_at
+          });
+        }
 
         for (var i = 0; i < stats.length; i++) {
           sPStats.push({
@@ -47,12 +57,11 @@ class Patient extends Component {
 
         for (var m = 0; m < stats.length; m++) {
           hRStats.push({
-            heart_rate: parseFloat(stats[m].ecg.substr(2,5).substr(0,3)),
+            heart_rate: parseFloat(stats[m].hr.substr(2,5).substr(0,3)),
             updated_at: stats[m].updated_at
           });
         }
 
-        console.log(hRStats)
 
         for (var z = 0; z < stats.length; z++) {
           tempStats.push({
@@ -71,6 +80,7 @@ class Patient extends Component {
           sPData: sPStats,
           hRData: hRStats,
           tempData: tempStats,
+          ecgData: ecgStats,
           dates: dates,
           currentStatDate: ""
         });
@@ -116,16 +126,16 @@ class Patient extends Component {
 
   render(){
 
-    const renderedHrStats = this.state.hRData;
-    const renderedSpStats = this.state.sPData;
-
     return(
       <div>
         <HeartRateGraph
-          chartData={renderedHrStats}
+          chartData={this.state.hRData}
         />
         <BloodSaturationGraph
-          chartData={renderedSpStats}
+          chartData={this.state.sPData}
+        />
+        <EcgGraph
+          chartData={this.state.ecgData}
         />
       </div>
 
